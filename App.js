@@ -13,6 +13,8 @@ import { PnPOrderView } from "./Src/PnPOrderView";
 import { PnPOrderDetailsView } from "./Src/PnPOrderDetailsView";
 import { PnPPalletDetailsView } from "./Src/PnPPalletDetailsView";
 import { LoginView } from "./Src/LoginView";
+import { DeliveryOrderView } from "./Src/DeliveryOrderView";
+import { DeliveryOrderDetailsView } from "./Src/DeliveryOrderDetailsView";
 
 const DemoNav = createStackNavigator(
   {
@@ -24,7 +26,9 @@ const DemoNav = createStackNavigator(
     OrderDetails: { screen: OrderDetailsView },
     PnPOrder: { screen: PnPOrderView },
     PnPOrderDetails: { screen: PnPOrderDetailsView },
-    PnPPalletDetails: { screen: PnPPalletDetailsView }
+    PnPPalletDetails: { screen: PnPPalletDetailsView },
+    DeliveryOrder: { screen: DeliveryOrderView },
+    DeliveryOrderDetails: { screen: DeliveryOrderDetailsView }
   },
   {
     headerMode: "none",

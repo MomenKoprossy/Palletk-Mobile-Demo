@@ -6,7 +6,6 @@ import {
   Left,
   Body,
   Button,
-  Icon,
   Title,
   Content,
   Right,
@@ -98,6 +97,26 @@ export class HomePageView extends Component {
                 style={{ backgroundColor: "#333435", justifyContent: "center" }}
               >
                 <Text>Pick & Pack</Text>
+              </Button>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => this.props.navigation.navigate("DeliveryOrder")}
+            >
+              <Image
+                source={require("../assets/delivery.png")}
+                style={{
+                  marginBottom: 10,
+                  width: 80,
+                  height: 80,
+                  marginStart: 9
+                }}
+              />
+              <Button
+                rounded
+                style={{ backgroundColor: "#333435", justifyContent: "center" }}
+              >
+                <Text>Delivery</Text>
               </Button>
             </TouchableOpacity>
           </ScrollView>

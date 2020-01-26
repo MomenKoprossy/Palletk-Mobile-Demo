@@ -37,6 +37,22 @@ export class OrderDetailsView extends React.Component {
         batchNo: "",
         palletID: "",
         itemID: ""
+      },
+      {
+        name: "Galaxy Carmel mini 280g",
+        Q: "",
+        expDate: "",
+        batchNo: "",
+        palletID: "",
+        itemID: ""
+      },
+      {
+        name: "Galaxy Carmel mini 280g",
+        Q: "",
+        expDate: "",
+        batchNo: "",
+        palletID: "",
+        itemID: ""
       }
     ]
   };

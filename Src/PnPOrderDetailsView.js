@@ -24,7 +24,27 @@ export class PnPOrderDetailsView extends React.Component {
       },
       {
         id: "32156498478",
-        loc: "a5687"
+        loc: "a5683"
+      },
+      {
+        id: "12875284578",
+        loc: "a2987"
+      },
+      {
+        id: "49356713598",
+        loc: "f4554"
+      },
+      {
+        id: "10248498451",
+        loc: "x2267"
+      },
+      {
+        id: "55501248575",
+        loc: "m2567"
+      },
+      {
+        id: "99521645405",
+        loc: "i5877"
       }
     ]
   };

@@ -19,44 +19,34 @@ import Constants from "expo-constants";
 import { ScrollView } from "react-native-gesture-handler";
 import { Input } from "galio-framework";
 
-export class PnPPalletDetailsView extends React.Component {
+export class DeliveryOrderDetailsView extends React.Component {
   state = {
-    Items: [
+    Pallets: [
       {
-        name: "KitKat",
+        name: "Galaxy Carmel mini 280g",
         Q: "",
-        oldID: "",
-        newID: "",
+        expDate: "",
+        batchNo: "",
+        palletID: "",
         itemID: ""
       },
       {
-        name: "Flutes",
+        name: "Galaxy Carmel mini 280g",
         Q: "",
-        oldID: "",
-        newID: "",
-        itemID: ""
-      },
-      {
-        name: "Lolipop",
-        Q: "",
-        oldID: "",
-        newID: "",
-        itemID: ""
-      },
-      {
-        name: "Galaxy",
-        Q: "",
-        oldID: "",
-        newID: "",
-        itemID: ""
-      },
-      {
-        name: "Cadbury",
-        Q: "",
-        oldID: "",
-        newID: "",
+        expDate: "",
+        batchNo: "",
+        palletID: "",
         itemID: ""
       }
+    ],
+    RainbowPallets: [
+      { name: "61949856498", id: "" },
+      { name: "32156498478", id: "" },
+      { name: "12875284578", id: "" },
+      { name: "49356713598", id: "" },
+      { name: "10248498451", id: "" },
+      { name: "55501248575", id: "" },
+      { name: "99521645405", id: "" }
     ]
   };
   render() {
@@ -69,24 +59,64 @@ export class PnPPalletDetailsView extends React.Component {
             </Button>
           </Left>
           <Body>
-            <Title>Pallet: {this.props.navigation.state.params.id}</Title>
+            <Title>Order: {this.props.navigation.state.params.id}</Title>
           </Body>
         </Header>
         <Content contentContainerStyle={styles.container}>
           <ScrollView>
-            {(this.state.Items || []).map((Pallet, index) => (
+            {(this.state.Pallets || []).map((Pallet, index) => (
               <Form key={index}>
                 <H1>{Pallet.name}</H1>
+                <Item fixedLabel style={styles.item}>
+                  <Label>Quantity:</Label>
+                  <Input
+                    style={styles.BCinput}
+                    editable={false}
+                    value={Pallet.Q}
+                  />
+                  <Button
+                    transparent
+                    onPress={() => this.getBarcode("1", index)}
+                  >
+                    <Icon name="barcode" />
+                  </Button>
+                </Item>
+                <Item fixedLabel style={styles.item}>
+                  <Label>Expiration Date:</Label>
+                  <Input
+                    style={styles.BCinput}
+                    editable={false}
+                    value={Pallet.expDate}
+                  />
+                  <Button transparent>
+                    <Icon name="barcode" style={{ color: "white" }} />
+                  </Button>
+                </Item>
+                <Item fixedLabel style={styles.item}>
+                  <Label>Batch No:</Label>
+                  <Input
+                    style={styles.BCinput}
+                    editable={false}
+                    value={Pallet.batchNo}
+                  />
+                  <Button
+                    transparent
+                    onPress={() => this.getBarcode("2", index)}
+                  >
+                    <Icon name="barcode" />
+                  </Button>
+                </Item>
+
                 <Item fixedLabel style={styles.item}>
                   <Label>Pallet ID:</Label>
                   <Input
                     style={styles.BCinput}
                     editable={false}
-                    value={Pallet.oldID}
+                    value={Pallet.palletID}
                   />
                   <Button
                     transparent
-                    onPress={() => this.getBarcode("1", index)}
+                    onPress={() => this.getBarcode("3", index)}
                   >
                     <Icon name="barcode" />
                   </Button>
@@ -98,34 +128,25 @@ export class PnPPalletDetailsView extends React.Component {
                     editable={false}
                     value={Pallet.itemID}
                   />
-                  <Button
-                    transparent
-                    onPress={() => this.getBarcode("2", index)}
-                  >
-                    <Icon name="barcode" />
-                  </Button>
-                </Item>
-                <Item fixedLabel style={styles.item}>
-                  <Label>Quantity:</Label>
-                  <Input
-                    style={styles.BCinput}
-                    onChangeText={value => this.setQuanitiy(value, index)}
-                    value={Pallet.Q}
-                  />
                   <Button transparent>
                     <Icon name="barcode" style={{ color: "white" }} />
                   </Button>
                 </Item>
+              </Form>
+            ))}
+            {(this.state.RainbowPallets || []).map((Pallet, index) => (
+              <Form key={index}>
+                <H1>{Pallet.name}</H1>
                 <Item fixedLabel style={styles.item}>
-                  <Label>New Pallet ID:</Label>
+                  <Label>Pallet ID:</Label>
                   <Input
                     style={styles.BCinput}
                     editable={false}
-                    value={Pallet.newID}
+                    value={Pallet.id}
                   />
                   <Button
                     transparent
-                    onPress={() => this.getBarcode("3", index)}
+                    onPress={() => this.getBarcode("4", index)}
                   >
                     <Icon name="barcode" />
                   </Button>
@@ -141,45 +162,49 @@ export class PnPPalletDetailsView extends React.Component {
               }}
             >
               <Icon name="checkmark-circle-outline" />
-              <Text>Confirm</Text>
+              <Text>Confirm Order</Text>
             </Button>
           </ScrollView>
         </Content>
       </Container>
     );
   }
-
-  setQuanitiy(value, index) {
-    temp = this.state.Items;
-    temp[index].Q = value;
-    this.setState({ Items: temp });
-  }
-
   getBarcode(code_type, index) {
     if (code_type == "1") {
       this.props.navigation.navigate("Scanner", {
         onChange: data => {
-          temp = this.state.Items;
-          temp[index].oldID = data;
-          this.setState({ Items: temp });
+          temp = this.state.Pallets;
+          temp[index].Q = data.slice(0, 5);
+          temp[index].expDate = data.slice(6, 10);
+          this.setState({ Pallets: temp });
         },
         prevView: "getData"
       });
     } else if (code_type == "2") {
       this.props.navigation.navigate("Scanner", {
         onChange: data => {
-          temp = this.state.Items;
-          temp[index].itemID = data;
-          this.setState({ Items: temp });
+          temp = this.state.Pallets;
+          temp[index].batchNo = data.slice(1, 5);
+          this.setState({ Pallets: temp });
         },
         prevView: "getData"
       });
     } else if (code_type == "3") {
       this.props.navigation.navigate("Scanner", {
         onChange: data => {
-          temp = this.state.Items;
-          temp[index].newID = data;
-          this.setState({ Items: temp });
+          temp = this.state.Pallets;
+          temp[index].palletID = data.slice(2, 5);
+          temp[index].itemID = data.slice(6, 10);
+          this.setState({ Pallets: temp });
+        },
+        prevView: "getData"
+      });
+    } else if (code_type == "4") {
+      this.props.navigation.navigate("Scanner", {
+        onChange: data => {
+          temp = this.state.RainbowPallets;
+          temp[index].id = data;
+          this.setState({ RainbowPallets: temp });
         },
         prevView: "getData"
       });

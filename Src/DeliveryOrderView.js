@@ -17,7 +17,7 @@ import {
 import Constants from "expo-constants";
 import { ScrollView } from "react-native-gesture-handler";
 
-export class PnPOrderView extends React.Component {
+export class DeliveryOrderView extends React.Component {
   state = {
     orders: [
       {
@@ -57,7 +57,7 @@ export class PnPOrderView extends React.Component {
             </Button>
           </Left>
           <Body>
-            <Title>Pick Orders</Title>
+            <Title>Delivery Orders</Title>
           </Body>
           <Right></Right>
         </Header>
@@ -82,6 +82,6 @@ export class PnPOrderView extends React.Component {
     );
   }
   handleOrderDetails = id => {
-    this.props.navigation.navigate("PnPOrderDetails", { id: id });
+    this.props.navigation.navigate("DeliveryOrderDetails", { id: id });
   };
 }
